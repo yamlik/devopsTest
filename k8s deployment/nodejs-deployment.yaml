@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejstest
+spec:
+  selector:
+    matchLabels:
+      app: nodejs
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+  template:
+    metadata:
+      labels:
+        app: nodejs
+    spec:
+      containers:
+        - name: nodejstest
+          image: nodejstest
+          ports:
+            - containerPort: 1234
+          imagePullPolicy: Never
